@@ -1,0 +1,12 @@
+{
+  "name": "discord-bot-test",
+  "description": "test bot",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js"
+  },
+  "author": "Zarlokh",
+  "dependencies": {
+    "discordie": "^0.5.5"
+  }
+}

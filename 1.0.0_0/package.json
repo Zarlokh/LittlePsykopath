@@ -1,9 +1,9 @@
 {
   "name": "discord-bot-test",
   "description": "test bot",
-  "main": "bot.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node app.js"
   },
   "author": "Zarlokh",
   "dependencies": {

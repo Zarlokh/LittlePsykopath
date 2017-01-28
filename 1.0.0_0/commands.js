@@ -1,7 +1,7 @@
 exports.commandList = [
   {
     "name": "zp@config",
-    "permission": 10,
+    "permission": 15,
     "method": 'config',
   },
   {
@@ -9,32 +9,37 @@ exports.commandList = [
     "options": [
       {
         name: "time",
-        param: "number"
+        type: "number"
       }
     ],
-    "permission": 10,
+    "permission": 8,
     "method": 'rollmute'
   },
   {
     "name": "zp@ping",
-    "permission": 10,
+    "permission": 8,
     "method": 'ping'
   },
   {
     "name": "zp@shifumi",
-    "args": ["players"],
+    "args": [
+      {
+        name: "player2",
+        type: "Player"
+      }
+    ],
     "options": [
       {
         name: "score",
-        param: "number"
+        type: "number"
       }
     ],
-    "permission": 10,
+    "permission": 8,
     "method": 'shifumi'
   },
   {
     "name": "zp@help",
-    "permission": 10,
+    "permission": 8,
     "method": 'help'
   }
 ];

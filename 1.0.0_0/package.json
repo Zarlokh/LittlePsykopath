@@ -1,9 +1,10 @@
 {
   "name": "discord-bot-test",
+  "version": "1.0.0",
   "description": "test bot",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon ./app.js localhost 1234"
   },
   "author": "Zarlokh",
   "dependencies": {

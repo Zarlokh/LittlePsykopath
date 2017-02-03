@@ -1,5 +1,6 @@
-var commands = require('./commands');
-var utils = require('./utils/functions');
+var commands = require('../config/commands');
+var utils = require('../utils/functions');
+var Error = require('./errors');
 
 var Command = function(name, args, options, permission, method) {
   this.name = name || null;
@@ -8,23 +9,12 @@ var Command = function(name, args, options, permission, method) {
   this.permission = permission || null;
   this.method = method || null;
 
-  this.check = (template, guild) => {
-    if(
-        this.args === null && template.args !== null ||
-        this.args !== null && template.args === null ||
-        this.args !== null && template.args !== null && this.args.length !== template.args.length
-      ){
-      return template.name.replace('zp@', '');
-    }
-    var isOk = false;
-    for(var indexArgs in this.args){
-      var commandArg = this.args[indexArgs];
-      var templateArg = template.args[indexArgs];
-      if(templateArg.type === "Player"){
-        isOk = utils.isOnlinePlayer(commandArg, guild);
-      }
-    }
-    return isOk;
+  this.process = () => {
+      eval(this.method + "()");
+  };
+
+  var ping = () => {
+    console.log("PsykoPong");
   };
 };
 
@@ -48,6 +38,7 @@ exports.getCommand = (commandLine) => {
 };
 
 exports.extractCommand = (commandLine) => {
+  commandLine = commandLine.replace(/\s\s+/g, ' ');
   var split = commandLine.split(' ');
   var result = new Command();
   var hadOptions = false;

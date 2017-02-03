@@ -1,12 +1,4 @@
-var commands = require('../commands');
-
-exports.sendError = (e, errorObject) => {
-  var dm = e.message.member.openDM().then(dm => {
-    dm.sendMessage(errorObject.message);
-  }, rejet => {
-    console.error("Erreur lors du DM : " + rejet);
-  });
-};
+var commands = require('../config/commands');
 
 exports.isAuthorized = (roles, permission) => {
   var isOk = false;
@@ -19,13 +11,3 @@ exports.isAuthorized = (roles, permission) => {
   }
   return isOk;
 };
-
-exports.isOnlinePlayer = (playerName, guild) => {
-  var onlineMembers = client.Users.onlineMembersForGuild(guild).forEach(function(user){
-    console.log(user.username);
-    if(user.username === playerName){
-      return true;
-    }
-  });
-  return true;
-}

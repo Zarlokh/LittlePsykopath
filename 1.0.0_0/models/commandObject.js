@@ -1,6 +1,7 @@
 var commands = require('../config/commands');
 var utils = require('../utils/functions');
 var Error = require('./errors');
+var configFile = require('../config/config');
 
 var Command = function(name, args, options, permission, method) {
   this.name = name || null;
@@ -9,12 +10,48 @@ var Command = function(name, args, options, permission, method) {
   this.permission = permission || null;
   this.method = method || null;
 
-  this.process = () => {
-      eval(this.method + "()");
+  this.process = (messageObject) => {
+      eval(this.method)(messageObject);
   };
 
-  var ping = () => {
-    console.log("PsykoPong");
+  var ping = (messageObject) => {
+    messageObject.channel.sendMessage('PsykoPong...');
+  };
+
+  var config = (messageObject) => {
+    var message = "Configuration :\n";
+    for(var property in configFile){
+      message += property + " = \"" + configFile[property] + "\";\n"
+    }
+    messageObject.channel.sendMessage(message);
+  };
+
+  var help = (messageObject) => {
+    var channel = messageObject.channel;
+    var permission = utils.highestPermission(messageObject.author.memberOf(messageObject.guild).roles);
+    var commandList = commands.commandList;
+    var message = "Liste des commandes disponibles :\n";
+    for(var index in commandList){
+      var command = commandList[index];
+      if(command.permission > permission) continue;
+
+      message += command.name + " ";
+      for(var indexArgs in command.args){
+        var arg = command.args[indexArgs];
+        message += arg.name + " ";
+      }
+      for(var indexOptions in command.options){
+        message += "[";
+        var option = command.options[indexOptions];
+        message += "+" + option.name + " ";
+        if(option.type !== ""){
+          message += option.type;
+        }
+        message += "] ";
+      }
+      message += "\n";
+    }
+    channel.sendMessage(message);
   };
 };
 

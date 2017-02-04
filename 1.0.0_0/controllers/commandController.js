@@ -55,6 +55,6 @@ exports.checkAndRun = (command, template, messageObject, onlineMembers) => {
     return;
   }else{
     command.method = template.method;
-    command.process();
+    command.process(messageObject);
   }
 };

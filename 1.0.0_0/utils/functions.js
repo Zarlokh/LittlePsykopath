@@ -11,3 +11,13 @@ exports.isAuthorized = (roles, permission) => {
   }
   return isOk;
 };
+
+exports.highestPermission = (roles) => {
+  var role = null;
+  for(var index in roles){
+    if(role === null || (role !== null && role < roles[index].position) ){
+      role = roles[index].position;
+    }
+  }
+  return role;
+}

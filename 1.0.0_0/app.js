@@ -18,8 +18,9 @@ client.Dispatcher.on(Events.GATEWAY_READY, e => {
 });
 
 client.Dispatcher.on(Events.MESSAGE_CREATE, e => {
+  if(e.message.author.bot) return;
   if(e.message.member === null || e.message.member.mute) return;
-  if(e.message.content.indexOf("zp@") === -1) return;
+  if(e.message.content.slice(0, 3) !== 'zp@') return;
 
   var errorList = Errors.errorList;
   var commandTemplate = commandObject.getCommand(e.message.content);

@@ -1,7 +1,7 @@
 exports.commandList = [
   {
     "name": "zp@config",
-    "permission": 15,
+    "permission": 8,
     "method": 'config',
   },
   {
@@ -12,7 +12,7 @@ exports.commandList = [
         type: "number"
       }
     ],
-    "permission": 8,
+    "permission": 10,
     "method": 'rollmute'
   },
   {
